@@ -20,26 +20,49 @@ function getPlayerChoice() {
     return playerSelection;
 }
 
-
-computerSelection = getComputerChoice();
-playerSelection = getPlayerChoice();
+let playerCount = 0;
+let computerCount = 0;
 
 function gameRound(playerSelection, computerSelection) {
     if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "You Win! Rock beats Scissors!";
+        return ["You Win! Rock beats Scissors!", playerCount = true, computerCount = false];
     } else if (playerSelection === "rock" && computerSelection === "rock" || playerSelection === "paper" && computerSelection === "paper" || playerSelection === "scissors" && computerSelection === "scissors"){
-        return "Draw!";
+        return ["Draw!", playerCount = false, computerCount = false];
     } else if (playerSelection === "rock" && computerSelection === "paper"){
-        return "You Lose! Paper beats Rock!";
+        return ["You Lose! Paper beats Rock!", playerCount = false, computerCount = true];
 } else if (playerSelection === "paper" && computerSelection === "rock"){
-    return "You Win! Paper beats Rock!";
+    return ["You Win! Paper beats Rock!", playerCount= true, computerCount = false];
 } else if (playerSelection === "paper" && computerSelection === "scissors"){
-    return "You Lose! Scissors beats Paper!";
+    return ["You Lose! Scissors beats Paper!", playerCount = false, computerCount = true];
 } else if (playerSelection === "scissors" && computerSelection === "paper"){
-    return "You Win! Scissors beats Paper!";
+    return ["You Win! Scissors beats Paper!", playerCount = true, computerCount = false];
 } else {
-    return "You Lose! Rock beats Scissors!";
+    return ["You Lose! Rock beats Scissors!", playerCount = false, computerCount = true];
 }}
-console.log(computerSelection)
-console.log(playerSelection)
-console.log(gameRound(playerSelection, computerSelection))
+
+let playerScore = 0;
+let computerScore = 0;
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let [result, pCount, cCount] = gameRound(getPlayerChoice(), getComputerChoice());
+        console.log(result);
+        playerCount = pCount;
+        computerCount = cCount;
+        if (playerCount === true && computerCount === false) {
+            ++playerScore;
+        } else if (playerCount === false && computerCount === true) {
+            ++computerScore;
+        }
+    }
+    return "End of game";
+}
+
+console.log(game());
+if (playerScore>computerScore) {
+    console.log("Congratulations! You Win!");
+} else {
+    console.log("You lose!")
+}
+console.log("Your final score: " + playerScore)
+console.log("Computer final score: " + computerScore);
