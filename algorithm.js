@@ -22,47 +22,76 @@ function getPlayerChoice() {
 
 let playerCount = 0;
 let computerCount = 0;
+const results = document.getElementById("results");
 
 function gameRound(playerSelection, computerSelection) {
     if (playerSelection === "rock" && computerSelection === "scissors") {
-        return ["You Win! Rock beats Scissors!", playerCount = true, computerCount = false];
+        results.textContent="You Win! Rock beats Scissors!";
+        return [playerCount = true, computerCount = false];
     } else if (playerSelection === "rock" && computerSelection === "rock" || playerSelection === "paper" && computerSelection === "paper" || playerSelection === "scissors" && computerSelection === "scissors"){
-        return ["Draw!", playerCount = false, computerCount = false];
+        results.textContent="Draw!";
+        return [playerCount = false, computerCount = false];
     } else if (playerSelection === "rock" && computerSelection === "paper"){
-        return ["You Lose! Paper beats Rock!", playerCount = false, computerCount = true];
+        results.textContent="You Lose! Paper beats Rock!";
+        return [playerCount = false, computerCount = true];
 } else if (playerSelection === "paper" && computerSelection === "rock"){
-    return ["You Win! Paper beats Rock!", playerCount= true, computerCount = false];
+    results.textContent="You Win! Paper beats Rock!";
+    return [playerCount= true, computerCount = false];
 } else if (playerSelection === "paper" && computerSelection === "scissors"){
-    return ["You Lose! Scissors beats Paper!", playerCount = false, computerCount = true];
+    results.textContent="You Lose! Scissors beats Paper!";
+    return [playerCount = false, computerCount = true];
 } else if (playerSelection === "scissors" && computerSelection === "paper"){
-    return ["You Win! Scissors beats Paper!", playerCount = true, computerCount = false];
+    results.textContent="You Win! Scissors beats Paper!";
+    return [playerCount = true, computerCount = false];
 } else {
-    return ["You Lose! Rock beats Scissors!", playerCount = false, computerCount = true];
+    results.textContent="You Lose! Rock beats Scissors!";
+    return [playerCount = false, computerCount = true];
 }}
+let playerScore = 0; computerScore = 0;
 
-let playerScore = 0;
-let computerScore = 0;
+function result() {
+    const scoreText = document.createElement('div');
+    scoreText.classList.add('scoreText');
+    scoreText.textContent = 'Current score: Player- ' + playerScore + " Computer- "+ computerScore;
+    results.appendChild(scoreText);
+}
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let [result, pCount, cCount] = gameRound(getPlayerChoice(), getComputerChoice());
-        console.log(result);
-        playerCount = pCount;
-        computerCount = cCount;
-        if (playerCount === true && computerCount === false) {
-            ++playerScore;
-        } else if (playerCount === false && computerCount === true) {
-            ++computerScore;
-        }
+
+function score() {
+    if (playerCount && !computerCount) {
+        playerScore++;
+        result();
+    } else if (!playerCount && computerCount) {
+        computerScore++;
+        result();
+    } else {
+        result();
     }
-    return "End of game";
+    if (computerScore === 5 || playerScore === 5 && computerScore>playerScore) {
+        result();
+        results.textContent="End of the game, you lost!!" ;
+    } else if (computerScore === 5 || playerScore === 5 && computerScore<playerScore){
+        result();
+        results.textContent="End of the game, you win!!" ;
+    }
 }
 
-console.log(game());
-if (playerScore>computerScore) {
-    console.log("Congratulations! You Win!");
-} else {
-    console.log("You lose!")
-}
-console.log("Your final score: " + playerScore)
-console.log("Computer final score: " + computerScore);
+const buttonPaper = document.getElementById("paper");
+const buttonRock = document.getElementById("rock");
+const buttonScissors= document.getElementById("scissors");
+
+paperGame = buttonPaper.addEventListener("click", function() {
+    playerChoice = "paper";
+    gameRound(playerChoice,getComputerChoice());
+    score();
+});
+rockGame = buttonRock.addEventListener("click", function() {
+    playerChoice = "rock";
+    gameRound(playerChoice,getComputerChoice());
+    score();
+});
+scissorsGame = buttonScissors.addEventListener("click", function() {
+    playerChoice = "scissors";
+    gameRound(playerChoice,getComputerChoice());
+    score();
+});
