@@ -1,3 +1,9 @@
+
+let playerCount = 0;
+let computerCount = 0;
+let playerScore = 0; computerScore = 0;
+const results = document.getElementById("results");
+
 function getRandomIntInclusive() {
     min = Math.ceil(1);
     max = Math.floor(3);
@@ -20,9 +26,6 @@ function getPlayerChoice() {
     return playerSelection;
 }
 
-let playerCount = 0;
-let computerCount = 0;
-const results = document.getElementById("results");
 
 function gameRound(playerSelection, computerSelection) {
     if (playerSelection === "rock" && computerSelection === "scissors") {
@@ -47,7 +50,7 @@ function gameRound(playerSelection, computerSelection) {
     results.textContent="You Lose! Rock beats Scissors!";
     return [playerCount = false, computerCount = true];
 }}
-let playerScore = 0; computerScore = 0;
+
 
 function result() {
     const scoreText = document.createElement('div');
