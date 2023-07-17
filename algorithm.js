@@ -53,10 +53,18 @@ function gameRound(playerSelection, computerSelection) {
 
 
 function result() {
-    const scoreText = document.createElement('div');
-    scoreText.classList.add('scoreText');
-    scoreText.textContent = 'Current score: Player- ' + playerScore + " Computer- "+ computerScore;
+    const scoreText = document.createElement("div");
+    const scorePlayer = document.createElement("div");
+    const scoreComputer = document.createElement("div");
+    scoreText.classList.add("scoreText");
+    scorePlayer.classList.add("scoreText");
+    scoreComputer.classList.add("scoreText");
+    scoreText.textContent = "Current score:";
+    scorePlayer.textContent = "Player:" + playerScore;
+    scoreComputer.textContent = "Computer:" + computerScore;
     results.appendChild(scoreText);
+    results.appendChild(scorePlayer);
+    results.appendChild(scoreComputer);
 }
 
 
@@ -72,10 +80,14 @@ function score() {
     }
     if (computerScore === 5 || playerScore === 5 && computerScore>playerScore) {
         result();
+        playerScore = 0;
+        computerScore = 0;
         results.textContent="End of the game, you lost!!" ;
     } else if (computerScore === 5 || playerScore === 5 && computerScore<playerScore){
         result();
-        results.textContent="End of the game, you win!!" ;
+        playerScore = 0;
+        computerScore = 0;
+        results.textContent="End of the game, you won!!" ;
     }
 }
 

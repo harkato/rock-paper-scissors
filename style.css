@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+body {
+    height: 100vh;    
+    font-family: 'VT323', monospace;
+    margin: 0;
+    background: #ffe1fc;
+    color: #333;
+    /* I'll give you this one for free */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title {
+    margin-bottom: 50px;
+    font-size: 40px;
+}
+button {
+    padding: 20px;
+    font-family: 'VT323', monospace;
+    border: none;
+    font-size: 20px;
+    border-radius: 8px;
+    background: #eeb6ff;
+    min-width: 110px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.scoreText {
+    padding: 20px;
+    font-size: 32px;
+    text-align: center;
+}
+
+#results {
+    padding: 20px;
+    font-size: 50px;
+}
